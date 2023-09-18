@@ -1,6 +1,8 @@
 import {
   addAnswer,
   addQuestion,
+  addReplyToReview,
+  addReview,
   editCourse,
   getAllCourses,
   getCourseByUser,
@@ -36,5 +38,12 @@ router.get("/get-course-content/:id", isAuthenticated, getCourseByUser);
 
 router.put("/add-question/:id", isAuthenticated, addQuestion);
 router.put("/add-answer", isAuthenticated, addAnswer);
+router.put("/add-review/:id", isAuthenticated, addReview);
+router.put(
+  "/add-reply",
+  isAuthenticated,
+  authorizeRoles("admin"),
+  addReplyToReview
+);
 
 export default router;
