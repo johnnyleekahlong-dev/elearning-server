@@ -48,7 +48,8 @@ export const createOrder = CatchAsyncError(
           price: course.price,
           date: new Date().toLocaleDateString("en-US", {
             year: "numeric",
-            month: "numeric",
+            month: "long",
+            day: "numeric",
           }),
         },
       };
@@ -79,9 +80,7 @@ export const createOrder = CatchAsyncError(
         message: `You have a new order from ${course?.name}`,
       });
 
-      if (course.purchased) {
-        course.purchased += 1;
-      }
+      course.purchased ? (course.purchased += 1) : course.purchased;
 
       await course.save();
 
