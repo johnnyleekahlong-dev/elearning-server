@@ -7,6 +7,8 @@ import userRouter from "./routes/user.route";
 import courseRouter from "./routes/course.route";
 import orderRouter from "./routes/order.route";
 import notificationRouter from "./routes/notification.route";
+import analysticsRouter from "./routes/analytics.route";
+import layoutRouter from "./routes/layout.route";
 
 const app = express();
 
@@ -22,9 +24,15 @@ app.use(cookieParser());
 
 app.use(errorHandler);
 
-// app.use("/api/v1", userRouter);
-// app.use("/api/v1", courseRouter);
-app.use("/api/v1", orderRouter, userRouter, courseRouter, notificationRouter);
+app.use(
+  "/api/v1",
+  orderRouter,
+  userRouter,
+  courseRouter,
+  notificationRouter,
+  analysticsRouter,
+  layoutRouter
+);
 
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
   const err = new Error(`Route ${req.originalUrl} not found`) as any;
