@@ -12,6 +12,7 @@ import {
   getAllUsers,
   updateUserRole,
   deleteUser,
+  getUserInfo,
 } from "../controllers/user.controller";
 import { authorizeRoles, isAuthenticated } from "../middleware/auth";
 
@@ -24,7 +25,7 @@ router.post("/social-auth", socialAuth);
 
 router.get("/logout", logoutUser);
 router.get("/refresh", updateAccessToken);
-router.get("/me", isAuthenticated, updateAccessToken);
+router.get("/me", updateAccessToken, isAuthenticated, getUserInfo);
 router.get("/get-users", isAuthenticated, authorizeRoles("admin"), getAllUsers);
 
 router.put("/update-user-info", isAuthenticated, updateUserInfo);
